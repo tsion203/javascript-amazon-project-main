@@ -6,7 +6,7 @@ console.log("convert cents to dollars")
 if(formatCurrency(2095) === '20.95'){
     console.log("passed");
 }else{
-    console("failed")
+    console.log("failed")
 };
 
 console.log("works with zero")
