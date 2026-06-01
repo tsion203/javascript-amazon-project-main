@@ -7,7 +7,7 @@
                 <div class="product-container">
                 <div class="product-image-container">
                     <img class="product-image"
-                    src="${product.image} ">
+                    src="${product.image}">
                 </div>
 
                 <div class="product-name limit-text-to-2-lines">
@@ -16,7 +16,7 @@
 
                 <div class="product-rating-container">
                     <img class="product-rating-stars"
-                    src="images/ratings/rating-${product.getStarsUrl}.png">
+                    src="${product.getStarsUrl()}">
                     <div class="product-rating-count link-primary">
                     ${product.rating.count}
                     </div>
@@ -40,7 +40,8 @@
                     <option value="10">10</option>
                     </select>
                 </div>
-
+                
+                ${product.extraInfoHTML()}
                 <div class="product-spacer"></div>
 
                 <div class="added-to-cart">
@@ -55,6 +56,8 @@
                 </div>`;
     })
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
+updateCartQuantity();
+
 function updateCartQuantity(){
     let cartQuantity= 0;
    cart.forEach((cartItem) => {
