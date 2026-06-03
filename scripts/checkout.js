@@ -1,16 +1,11 @@
-import { loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
 import {renderOrderSummary} from "./Checkout/OrderSummary.js";
 import { renderPaymentSummary } from "./Checkout/PaymentSummary.js";
 import { loadCart } from "../data/cart.js";
 
 Promise.all(
-    [new Promise ( (resolve) => {
-    loadProducts( () => {
-        resolve("value1");
-    })
-
-}), 
-    new Promise (  (resolve) => {
+    [loadProductsFetch(), 
+    new Promise ((resolve) => {
         loadCart(() => {
         resolve();
     });
