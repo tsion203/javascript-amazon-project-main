@@ -21,33 +21,48 @@ function saveToStorage(){
 
 export function addTocart(productId){
      let matchingItem;
-    cart.forEach((cartItem) => {
-        if(productId=== cartItem.productId){
-            matchingItem = cartItem;
-        }
-    });
-    if(matchingItem){
-        matchingItem.quantity +=1 ;
-    }
-    else{
- cart.push({
-        productId: productId,
-        quantity: 1,
-        deliveryOptionId: '1'
-    })
-    }
-    saveToStorage();
-} 
+        cart.forEach((cartItem) => {
+            if(productId=== cartItem.productId){
+                matchingItem = cartItem;
+            }
+        });
+        const selectedValue = Number(document.querySelector(`.js-quantity-selector-${productId} select`).value);
 
-export function removeFromCart(productId){
-     const newCart =[];
-     cart.forEach((cartItem) =>{
-        if(cartItem.productId !== productId){
-            newCart.push(cartItem);
+        if (selectedValue === 1){
+            if(matchingItem){
+                matchingItem.quantity +=1 ;
+            }
+            else{
+        cart.push({
+                productId: productId,
+                quantity: 1,
+                deliveryOptionId: '1'
+            })
+            }
+            saveToStorage();
+    }  else{
+            if(matchingItem){
+                matchingItem.quantity +=selectedValue;
+            }
+            else{
+                cart.push({
+                    productId: productId,
+                    quantity: selectedValue,
+                    deliveryOptionId: '1'
+                });
+            }
+            saveToStorage();
         }
-     } )
-     cart = newCart;
-     saveToStorage();
+    }
+    export function removeFromCart(productId){
+        const newCart =[];
+        cart.forEach((cartItem) =>{
+            if(cartItem.productId !== productId){
+                newCart.push(cartItem);
+            }
+        } )
+        cart = newCart;
+        saveToStorage();
 }
 
  export function updateDeliveryOption(productId, deliveryOptionId){
@@ -70,4 +85,4 @@ export function loadCart(fun){
     });
     xhr.open("GET", "https://supersimplebackend.dev/cart");
     xhr.send();
-}
+};  

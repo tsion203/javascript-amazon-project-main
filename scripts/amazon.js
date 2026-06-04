@@ -29,7 +29,7 @@
                     ${product.getPrice()}
                 </div>
 
-                <div class="product-quantity-container">
+                <div class="product-quantity-container js-quantity-selector-${product.id}">
                     <select>
                     <option selected value="1">1</option>
                     <option value="2">2</option>
@@ -68,6 +68,7 @@ function updateCartQuantity(){
    })
    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity; 
 }
+
 document.querySelectorAll(".js-add-to-cart").forEach((button) =>{
     button.addEventListener("click",() => {
     const productId = button.dataset.productId;
