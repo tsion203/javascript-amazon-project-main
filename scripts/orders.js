@@ -1,4 +1,4 @@
-import { getProduct, loadProductsFetch} from "../data/products.js"
+import { getProduct, loadProductsFetch, products} from "../data/products.js"
 import {orders} from '../data/orders.js';
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { cart, addTocart, updateCartQuantity }from "../data/cart.js";
@@ -42,7 +42,7 @@ async function loadPage(){
   function productsListHTML (order){
     let productsListHTML = "";
 
-    order.products.forEach((productDetails) => {
+    (order.products || []).forEach((productDetails) => {
       const product = getProduct(productDetails.productId);
       productsListHTML += `
          <div class="product-image-container">
@@ -91,3 +91,4 @@ async function loadPage(){
 }
 loadPage();
 console.log(cart);
+console.log(orders);
